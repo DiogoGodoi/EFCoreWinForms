@@ -10,17 +10,17 @@ namespace CONTROLE
         {
 			repository = new RepositoryUsuarios();
         }
-        public bool Autenticar(mdlUsuario _mdlUsuario)
+        public mdlUsuario Autenticar(mdlUsuario _mdlUsuario)
 		{
-			var retorno = repository.Autenticar(_mdlUsuario);
+			var usuario = repository.Autenticar(_mdlUsuario);
 
-			if(retorno == true)
+			if(usuario != null)
 			{
-				return true;
+				return usuario;
 			}
 			else
 			{
-				return false;
+				return null;
 			}
 		}
 	}

@@ -9,7 +9,7 @@ namespace AUTENTICACAO
         public MeuContext(DbContextOptions<MeuContext> options): base(options) { }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			string conexao = "Server=PC-INFRA; Initial Catalog=Identity; Integrated Security=True; Encrypt=False;";
+			string conexao = "Server=PC-INFRA; Initial Catalog=DatabaseTeste; Integrated Security=True; Encrypt=False;";
 
 			optionsBuilder.UseSqlServer(conexao);
 		}

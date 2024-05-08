@@ -8,6 +8,7 @@ namespace AUTENTICACAO.Repository
 		bool Cadastrar(T model);
 		bool Atualizar(T model);
 		bool Excluir(T model);
-		bool Autenticar(T model);	
+		IEnumerable<mdlUsuario> Listar();
+		mdlUsuario Autenticar(T model);	
 	}
 }

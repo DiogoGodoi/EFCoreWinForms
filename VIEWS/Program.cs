@@ -1,6 +1,6 @@
 using AUTENTICACAO;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
+using MODELS;
 using Unity;
 
 namespace VIEWS
@@ -19,6 +19,7 @@ namespace VIEWS
 			var container = new UnityContainer();
 
 			container.RegisterType<MeuContext>();
+			container.RegisterType<mdlUsuario>();
 
 			using (var context = container.Resolve<MeuContext>())
 			{
@@ -28,7 +29,7 @@ namespace VIEWS
 
 			ApplicationConfiguration.Initialize();
 
-			Application.Run(new frmLogin());
+			Application.Run(new frmLogin(container.Resolve<mdlUsuario>()));
 		}
 	}
 }

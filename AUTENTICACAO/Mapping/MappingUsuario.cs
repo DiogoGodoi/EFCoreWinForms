@@ -27,12 +27,13 @@ namespace AUTENTICACAO.Mapping
 				.HasColumnType("varchar(8)")
 				.IsRequired(true);
 
-			builder.Property(i => i.Tipo)
-				.HasColumnName("Tipo")
+			builder.Property(i => i.Nivel)
+				.HasColumnName("Nivel")
 				.HasColumnType("varchar(15)")
 				.IsRequired(true);
 
-			builder.HasData(new mdlUsuario { Id = 1, NomeUsuario = "Diogo", Tipo = "Administrador", Senha = "12345678" });
+			builder.HasData(new mdlUsuario { Id = 1, NomeUsuario = "Diogo", Nivel = "Administrador", Senha = "12345678" });
+			builder.HasData(new mdlUsuario { Id = 2, NomeUsuario = "Cecilia", Nivel = "Operador", Senha = "12345678" });
 		}
 	}
 }

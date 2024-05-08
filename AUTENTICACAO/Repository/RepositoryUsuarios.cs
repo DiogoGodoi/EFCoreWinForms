@@ -1,6 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using MODELS;
+﻿using MODELS;
 
 namespace AUTENTICACAO.Repository
 {
@@ -11,6 +9,7 @@ namespace AUTENTICACAO.Repository
 		{
 			_context = new MeuContext();
 		}
+
 		public bool Atualizar(mdlUsuario model)
 		{
 			try
@@ -70,7 +69,7 @@ namespace AUTENTICACAO.Repository
 				throw new Exception(ex.Message);
 			}
 		}
-		public IEnumerable<mdlUsuario> Listar(mdlUsuario model)
+		public IEnumerable<mdlUsuario> Listar()
 		{
 			try
 			{
@@ -111,7 +110,7 @@ namespace AUTENTICACAO.Repository
 				throw new Exception(ex.Message);
 			}
 		}
-		public bool Autenticar(mdlUsuario model)
+		public mdlUsuario Autenticar(mdlUsuario model)
 		{
 			try
 			{
@@ -119,16 +118,16 @@ namespace AUTENTICACAO.Repository
 
 				if(usuario != null)
 				{
-					return true;
+					return usuario;
 				}
 				else
 				{
-					return false;
+					return null;
 				}
 
 			}catch(Exception ex)
 			{
-				return false;
+				return null;
 				throw new Exception(ex.Message);
 			}
 		}

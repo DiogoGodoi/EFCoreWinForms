@@ -5,11 +5,14 @@ namespace VIEWS
 {
 	public partial class frmLogin : Form
 	{
-		public frmLogin()
+		private mdlUsuario _mdlUsuario;
+		public frmLogin(mdlUsuario _mdlUsuario)
 		{
 			InitializeComponent();
+			this._mdlUsuario = _mdlUsuario;
 			btnSair.Click += (sender, e) => { Sair(); };
 			toolMenuSair.Click += (sender, e) => { Sair(); };
+			Activated += (sender, e) => { txtUsuario.Text = String.Empty; txtSenha.Text = String.Empty; };
 		}
 		private void Sair()
 		{
@@ -17,8 +20,6 @@ namespace VIEWS
 		}
 		private bool Autenticar()
 		{
-
-			mdlUsuario _mdlUsuario = new mdlUsuario();
 			ctlAutenticacao _ctrlAutenticacao = new ctlAutenticacao();
 
 			try
@@ -40,8 +41,9 @@ namespace VIEWS
 
 					var retorno = _ctrlAutenticacao.Autenticar(_mdlUsuario);
 
-					if (retorno == true)
+					if (retorno != null)
 					{
+						_mdlUsuario = retorno;
 						return true;
 					}
 					else
@@ -63,7 +65,7 @@ namespace VIEWS
 
 			if(retorno == true)
 			{
-				frmMenu _frmMenu = new frmMenu(this);
+				frmMenu _frmMenu = new frmMenu(this, _mdlUsuario);
 				_frmMenu.Show();
 				this.Hide();
 				MessageBox.Show("Autenticado com sucesso", "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

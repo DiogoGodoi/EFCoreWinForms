@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AUTENTICACAO.Migrations
+namespace DADOS.Migrations
 {
     [DbContext(typeof(MeuContext))]
     partial class MeuContextModelSnapshot : ModelSnapshot
@@ -29,6 +29,11 @@ namespace AUTENTICACAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Nivel")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)")
+                        .HasColumnName("Nivel");
+
                     b.Property<string>("NomeUsuario")
                         .IsRequired()
                         .HasColumnType("varchar(10)")
@@ -39,11 +44,6 @@ namespace AUTENTICACAO.Migrations
                         .HasColumnType("varchar(8)")
                         .HasColumnName("Senha");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("varchar(15)")
-                        .HasColumnName("Tipo");
-
                     b.HasKey("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -53,9 +53,16 @@ namespace AUTENTICACAO.Migrations
                         new
                         {
                             Id = 1,
+                            Nivel = "Administrador",
                             NomeUsuario = "Diogo",
-                            Senha = "12345678",
-                            Tipo = "Administrador"
+                            Senha = "12345678"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nivel = "Operador",
+                            NomeUsuario = "Cecilia",
+                            Senha = "12345678"
                         });
                 });
 #pragma warning restore 612, 618

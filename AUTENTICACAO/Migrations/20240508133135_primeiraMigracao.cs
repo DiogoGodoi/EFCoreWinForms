@@ -2,10 +2,12 @@
 
 #nullable disable
 
-namespace AUTENTICACAO.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace DADOS.Migrations
 {
     /// <inheritdoc />
-    public partial class CriacaoBanco : Migration
+    public partial class primeiraMigracao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +20,7 @@ namespace AUTENTICACAO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(10)", nullable: false),
                     Senha = table.Column<string>(type: "varchar(8)", nullable: false),
-                    Tipo = table.Column<string>(type: "varchar(15)", nullable: false)
+                    Nivel = table.Column<string>(type: "varchar(15)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,8 +29,12 @@ namespace AUTENTICACAO.Migrations
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
-                columns: new[] { "Id", "Nome", "Senha", "Tipo" },
-                values: new object[] { 1, "Diogo", "12345678", "Administrador" });
+                columns: new[] { "Id", "Nivel", "Nome", "Senha" },
+                values: new object[,]
+                {
+                    { 1, "Administrador", "Diogo", "12345678" },
+                    { 2, "Operador", "Cecilia", "12345678" }
+                });
         }
 
         /// <inheritdoc />

@@ -17,8 +17,8 @@ namespace VIEWS
 			menuStripLogout.Click += (sender, e) => { frmLogin.Show(); this.Close(); };
 			btnSair.Click += (sender, e) => { frmLogin.Show(); this.Close(); };
 			btnEstoque.Click += (sender, e) => { AbrirTelaEstoque(); };
+			btnUsuario.Click += (sender, e) => { AbrirTelaUsuarios(); };
 			FormClosed += (sender, e) => { frmLogin.Show(); };
-			Load += (sender, e) => { AbrirTelaEstoque(); };
 		}
 		private void frmMenu_Load(object sender, EventArgs e)
 		{
@@ -33,11 +33,45 @@ namespace VIEWS
 					MessageBox.Show("A tela de estoque já está aberta", "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
+				else
+				{
+					this.Close();
+				}
 			}
 			frmEstoque frmEstoque = new frmEstoque();
 			frmEstoque.MdiParent = this;
 			frmEstoque.Show();
 			frmEstoque.WindowState = FormWindowState.Maximized;
+		}
+		private void AbrirTelaUsuarios()
+		{
+			foreach (Form form in this.MdiChildren)
+			{
+				if (form is frmUsuario)
+				{
+					MessageBox.Show("A tela de estoque já está aberta", "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
+				else
+				{
+					form.Close();
+				}
+			}
+			frmUsuario frmUsuario = new frmUsuario();
+			frmUsuario.MdiParent = this;
+
+			frmUsuario.FormClosed += (sender, e) =>
+			{
+				panelSideMenu.Visible = true;
+			};
+
+			frmUsuario.Activated += (sender, e) =>
+			{
+				panelSideMenu.Visible = false;
+			};
+
+			frmUsuario.Show();
+			frmUsuario.WindowState = FormWindowState.Maximized;
 		}
 	}
 }

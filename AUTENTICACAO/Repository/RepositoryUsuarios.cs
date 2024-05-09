@@ -47,11 +47,11 @@ namespace AUTENTICACAO.Repository
 				throw new Exception(ex.Message);
 			}
 		}
-		public bool Excluir(mdlUsuario model)
+		public bool Excluir(int id)
 		{
 			try
 			{
-				var usuario = _context.usuarios.FirstOrDefault(i => i.Id == model.Id);
+				var usuario = _context.usuarios.FirstOrDefault(i => i.Id == id);
 				if (usuario == null)
 				{
 					return false;
@@ -77,7 +77,7 @@ namespace AUTENTICACAO.Repository
 
 				if(usuarios.Count() > 0)
 				{
-					return usuarios.OrderBy(i => i.NomeUsuario);
+					return usuarios.OrderBy(i => i.Id);
 				}
 				else
 				{
@@ -90,11 +90,11 @@ namespace AUTENTICACAO.Repository
 				throw new Exception(ex.Message);
 			}
 		}
-		public mdlUsuario Procurar(mdlUsuario model)
+		public List<mdlUsuario> ProcurarPorNome(string nome)
 		{
 			try
 			{
-				var usuario = _context.usuarios.FirstOrDefault(i => i.Id == model.Id);
+				var usuario = _context.usuarios.Where(i => i.NomeUsuario == nome).ToList();
 
 				if(usuario == null)
 				{
@@ -105,6 +105,27 @@ namespace AUTENTICACAO.Repository
 					return usuario;
 				}
 			}catch(Exception ex)
+			{
+				return null;
+				throw new Exception(ex.Message);
+			}
+		}
+		public mdlUsuario ProcurarPorId(int id)
+		{
+			try
+			{
+				var usuario = _context.usuarios.FirstOrDefault(i => i.Id == id);
+
+				if (usuario == null)
+				{
+					return null;
+				}
+				else
+				{
+					return usuario;
+				}
+			}
+			catch (Exception ex)
 			{
 				return null;
 				throw new Exception(ex.Message);

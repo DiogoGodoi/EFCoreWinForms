@@ -83,6 +83,7 @@
 			dtGridUsuarios.MultiSelect = false;
 			dtGridUsuarios.Name = "dtGridUsuarios";
 			dtGridUsuarios.ReadOnly = true;
+			dtGridUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 			dtGridUsuarios.Size = new Size(650, 331);
 			dtGridUsuarios.TabIndex = 1;
 			// 
